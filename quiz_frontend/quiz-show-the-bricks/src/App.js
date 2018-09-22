@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Login from './Login'
+import Registration from './Registration'
 
-import Bulma from 'bulma/css/bulma.css'
+// import Bulma from 'bulma/css/bulma.css'
 
 class App extends Component {
   constructor () {
@@ -29,7 +30,10 @@ class App extends Component {
   render () {
     // const { currentUser } = this.state
     return (
-      <Login setCurrentUser={this.setCurrentUser} />
+      <div>
+        <Login setCurrentUser={this.setCurrentUser} />
+        <Registration setCurrentUser={this.setCurrentUser} />
+      </div>
     )
   }
 }

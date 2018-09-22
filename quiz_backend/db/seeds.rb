@@ -25,6 +25,7 @@ QUIZZES_TABLE.each {|quiz_row|
   quiz = Quiz.new(
     title:quiz_row["title"],
     description:quiz_row["description"],
+    published:quiz_row["published"]
   )
   quiz.save
   

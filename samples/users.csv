@@ -1,0 +1,7 @@
+username,password,role
+greguser,gregpassword,user
+ashleyuser,ashleypassword,user
+danuser,danpassword,user
+gregadmin,gregpassword,admin
+ashleyadmin,ashleypassword,admin
+danadmin,danpassword,admin

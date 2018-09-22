@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   render () {
-    // const { currentUser } = this.state
+    const { currentUser } = this.state
     return (
       <div>
         <Login setCurrentUser={this.setCurrentUser} />

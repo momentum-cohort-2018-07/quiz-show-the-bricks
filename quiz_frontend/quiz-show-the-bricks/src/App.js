@@ -1,21 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Login from './Login'
+
+import Bulma from 'bulma/css/bulma.css'
 
 class App extends Component {
-  render() {
+  constructor () {
+    super()
+    this.state = {
+      currentUser: null
+    }
+    const username = window.localStorage.getItem('username')
+    const token = window.localStorage.getItem('token')
+    if (username && token) {
+      this.state.currentUser = { username, token }
+    }
+    this.setCurrentUser = this.setCurrentUser.bind(this)
+  }
+
+  setCurrentUser (user) {
+    window.localStorage.setItem('username', user.username)
+    window.localStorage.setItem('token', user.token)
+    this.setState({ currentUser: user })
+  }
+
+  logOut () {
+  }
+
+  render () {
+    // const { currentUser } = this.state
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <Login setCurrentUser={this.setCurrentUser} />
+    )
   }
 }
 
-export default App;
+export default App

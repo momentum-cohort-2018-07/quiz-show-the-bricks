@@ -16,7 +16,7 @@ class Login extends Component {
   handlesubmit (event) {
     event.preventDefault()
     console.log(this.state.username, 'username')
-    request.post('/api/v1/users/login')
+    request.post('https://fierce-forest-49180.herokuapp.com/api/v1/users/login')
       .then(res => res.body)
       .then(user => this.props.setCurrentUser(user))
   }

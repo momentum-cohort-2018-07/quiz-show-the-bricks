@@ -31,7 +31,7 @@ class App extends Component {
     return (
       <div>
         <Login setCurrentUser={this.setCurrentUser} />
-        <Registration setCurrentUser={this.setCurrentUser} />
+        {/* <Registration setCurrentUser={this.setCurrentUser} /> */}
       </div>
     )
   }

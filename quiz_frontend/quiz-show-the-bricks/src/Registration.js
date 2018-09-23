@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
-
-import {
-  Modal, ModalBackground, ModalCard, ModalCardHeader, ModalCardBody, ModalCardTitle, ModalCardFooter,
-  CreateAccount,
-  Button
-} from 'bloomer'
+import request from 'superagent'
 
 class Registration extends Component {
   constructor () {
@@ -12,36 +7,42 @@ class Registration extends Component {
     this.state = {
       username: '',
       password: '',
-      passwordConfirmation: '',
+      // passwordConfirmation: '',
       isRegistering: false
     }
+    this.handlesubmit = this.handlesubmit.bind(this)
   }
 
-  // handleSubmit (event) {
-  //   request.post('/api/v1/users')
-  //     .then(res => res.body.token)
-  // }
+  handlesubmit (event) {
+    event.preventDefault()
+    this.setState({isRegistering: true})
+    const newUser = {
+      username: this.state.username,
+      password: this.state.password
+    }
+    request.post('https://fierce-forest-49180.herokuapp.com/api/v1/users')
+      .send(newUser)
+      .then(res => res.body)
+      .then(user => this.props.setCurrentUser(user))
+  }
 
   render () {
-    const { username, password, errorMsg, passwordConfirmation } = this.state
+    const { username, password, errorMsg, } = this.state
     return (
       <div className='register'>
-        <Modal isActive={this.state.isRegistering}>
-          <ModalBackground />
-          <ModalCard>
-            <ModalCardHeader>
-              <ModalCardTitle>Create Account</ModalCardTitle>
-              <CreateAccount />
-            </ModalCardHeader>
-            <ModalCardBody>
-              Enter a username and password to create an account!
-            </ModalCardBody>
-            <ModalCardFooter>
-              <Button isColor='success'>Save</Button>
-              <Button isColor='warning'>Cancel</Button>
-            </ModalCardFooter>
-          </ModalCard>
-        </Modal>
+        <form onSubmit={this.handlesubmit}>
+          <div className='column'>
+            <input type='text' placeholder='username' value={username}
+              onChange={(e) => this.setState({ username: e.target.value })} />
+          </div>
+          <div className='column'>
+            <input type='password' placeholder='password' value={password}
+              onChange={(e) => this.setState({ password: e.target.value })} />
+          </div>
+          <div className='column'>
+            <button>Register</button>
+          </div>
+        </form>
       </div>
     )
   }

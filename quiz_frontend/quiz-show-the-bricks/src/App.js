@@ -23,6 +23,9 @@ class App extends Component {
     this.setState({ currentUser: user })
   }
 
+  createNewUser () {
+  }
+
   logOut () {
   }
 
@@ -31,7 +34,7 @@ class App extends Component {
     return (
       <div>
         <Login setCurrentUser={this.setCurrentUser} />
-        {/* <Registration setCurrentUser={this.setCurrentUser} /> */}
+        <Registration setCurrentUser={this.setCurrentUser} />
       </div>
     )
   }

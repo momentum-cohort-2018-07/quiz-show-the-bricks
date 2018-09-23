@@ -41,7 +41,7 @@ class Login extends Component {
                 <button type='submit'>Log In</button>
               </div>
               <div className='column'>
-                <button>Register</button>
+                <button onClick={() => this.setState({isRegistering: true})}>Register</button>
               </div>
             </div>
           </form>

@@ -46,9 +46,6 @@ class Login extends Component {
               <div className='column'>
                 <button type='submit'>Log In</button>
               </div>
-              <div className='column'>
-                <button>Register</button>
-              </div>
             </div>
           </form>
         </div>

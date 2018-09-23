@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import Login from './Login'
 import Registration from './Registration'
+<<<<<<< HEAD
 
 import 'bulma/css/bulma.css'
+=======
+import Bulma from 'bulma/css/bulma.css'
+>>>>>>> origin
 
 class App extends Component {
   constructor () {

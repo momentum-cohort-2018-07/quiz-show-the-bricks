@@ -14,9 +14,15 @@ class Login extends Component {
   }
 
   handlesubmit (event) {
+    this.setState({loggedIn: true})
+    const setUser = {
+      username: this.state.username,
+      password: this.state.password
+    }
     event.preventDefault()
     console.log(this.state.username, 'username')
     request.post('https://fierce-forest-49180.herokuapp.com/api/v1/users/login')
+      .send(setUser)
       .then(res => res.body)
       .then(user => this.props.setCurrentUser(user))
   }

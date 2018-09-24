@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import 'bulma/css/bulma.css'
 
 import EnterSite from './EnterSite'
-
 import QuizIndex from './QuizIndex'
+
 // import {
 //   BrowserRouter as Router,
 //   Route,
@@ -34,6 +34,14 @@ class App extends Component {
 
   logOut () {
   }
+
+  // logOut () {
+  //   window.setCurrentUser(null)
+  //   window.localStorage.clear()
+  //   this.setState({
+  //     currentUser: null
+  //   })
+  // }
 
   render () {
     const { currentUser } = this.state

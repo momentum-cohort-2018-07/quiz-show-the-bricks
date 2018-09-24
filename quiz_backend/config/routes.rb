@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
       post 'users/login', to: 'users#login'
       resources :users, only: [:create]
+
+      resources :attempts, only: [:create]
     end
   end
 

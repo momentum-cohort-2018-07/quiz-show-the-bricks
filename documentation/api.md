@@ -27,3 +27,11 @@ GET https://fierce-forest-49180.herokuapp.com/api/v1/quizzes
 api_token not required
 
 no required keys
+
+## quizzes#show
+
+GET	https://fierce-forest-49180.herokuapp.com/api/v1/quizzes/:id
+
+valid api_token required
+
+no required keys

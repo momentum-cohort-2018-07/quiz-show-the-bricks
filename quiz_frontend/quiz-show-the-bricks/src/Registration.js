@@ -27,23 +27,25 @@ class Registration extends Component {
   }
 
   render () {
-    const { username, password, errorMsg, } = this.state
+    const { username, password, errorMsg } = this.state
     return (
-      <div className='register'>
-        <form onSubmit={this.handlesubmit}>
-          <div className='column'>
-            <input type='text' placeholder='username' value={username}
-              onChange={(e) => this.setState({ username: e.target.value })} />
-          </div>
-          <div className='column'>
-            <input type='password' placeholder='password' value={password}
-              onChange={(e) => this.setState({ password: e.target.value })} />
-          </div>
-          <div className='column'>
-            <button>Register</button>
-          </div>
-        </form>
-      </div>
+      <header>
+        <div className='register'>
+          <form onSubmit={this.handlesubmit}>
+            <div className='column'>
+              <input type='text' placeholder='username' value={username}
+                onChange={(e) => this.setState({ username: e.target.value })} />
+            </div>
+            <div className='column'>
+              <input type='password' placeholder='password' value={password}
+                onChange={(e) => this.setState({ password: e.target.value })} />
+            </div>
+            <div className='column'>
+              <button>Register</button>
+            </div>
+          </form>
+        </div>
+      </header>
     )
   }
 }

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :quizzes, only: [:index]
+      resources :quizzes, only: [:index, :show]
 
       post 'users/login', to: 'users#login'
       resources :users, only: [:create]

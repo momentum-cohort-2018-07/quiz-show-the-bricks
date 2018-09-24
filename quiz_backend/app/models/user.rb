@@ -6,6 +6,7 @@ class User < ApplicationRecord
     has_secure_token :api_token
     validates :username, presence: true, uniqueness: true, length: {minimum: 1}
     validates :password, length: {minimum: 5}
+    has_many :attempts
 
     def set_defaults
        self.role = "user"

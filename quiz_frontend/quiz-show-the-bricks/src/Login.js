@@ -14,6 +14,7 @@ class Login extends Component {
   }
 
   handlesubmit (event) {
+    event.preventDefault()
     this.setState({loggedIn: true})
     const setUser = {
       username: this.state.username,

@@ -27,7 +27,7 @@ class Registration extends Component {
   }
 
   render () {
-    const { username, password, errorMsg, } = this.state
+    const { username, password, errorMsg } = this.state
     return (
       <div className='register'>
         <form onSubmit={this.handlesubmit}>

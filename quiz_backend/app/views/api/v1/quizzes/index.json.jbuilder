@@ -1,4 +1,3 @@
-json.status 200
 json.quizzes @quizzes do |quiz|
   json.id quiz.id
   json.title quiz.title

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Login from './Login'
+import QuizIndex from './QuizIndex'
 import Registration from './Registration'
 import Bulma from 'bulma/css/bulma.css'
 
@@ -33,8 +34,13 @@ class App extends Component {
     const { currentUser } = this.state
     return (
       <div>
-        <Login setCurrentUser={this.setCurrentUser} />
-        <Registration setCurrentUser={this.setCurrentUser} />
+        <div>
+          <Login setCurrentUser={this.setCurrentUser} />
+          <Registration setCurrentUser={this.setCurrentUser} />
+        </div>
+        <div>
+          <QuizIndex />
+        </div>
       </div>
     )
   }

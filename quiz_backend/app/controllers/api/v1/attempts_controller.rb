@@ -8,12 +8,15 @@ class Api::V1::AttemptsController < ApplicationController
       })
       @attempt.score_quiz(params[:quiz])
       if @attempt.save()
-        
+        render "/api/v1/attempts/create_success.json", status: :ok
       else
-
+        @message = "attempt did not save"
+        render "/api/failure.json", status: :unprocessable_entity
+        
       end
     else
-      puts "*************** not authenticated"
+      @message = "invalid HTTP authentication token"
+      render "/api/failure.json", status: :unauthorized
     end
     
   end

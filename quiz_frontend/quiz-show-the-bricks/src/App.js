@@ -14,14 +14,14 @@ class App extends Component {
     this.state = {
       currentUser: null
     }
-    const username = window.localStorage.getItem('username')
-    const token = window.localStorage.getItem('token')
-    if (username && token) {
-      this.state.currentUser = { username, token }
-    // this.setState(state => ({token: 'token'})
-    }
+    // const username = window.localStorage.getItem('username')
+    // const token = window.localStorage.getItem('token')
+    // if (username && token) {
+    //   this.state.currentUser = { username, token }
+    // // this.setState(state => ({token: 'token'})
+    // }
     this.setCurrentUser = this.setCurrentUser.bind(this)
-    // this.logout = this.logout.bind(this)
+    // // this.logout = this.logout.bind(this)
   }
 
   setCurrentUser (user) {
@@ -42,52 +42,16 @@ class App extends Component {
   render () {
     const { currentUser } = this.state
     return (
-      <Router>
-        <div id='root'>
-          <div className='App'>
-            <header className='App-header'>
-              <h1 className='App-title'><strong>The Bricks</strong></h1>
-            </header>
-            <div>
-              <Registration>
-                <div> something </div>
-              </Registration>
-            </div>
-            <div>
-              <Login>
-                <div> something </div>
-              </Login>
-            </div>
-
-            {/* <Route exact path='/' render={() =>
-              <Guard condition={currentUser} redirectTo='./Login'>
-                <Dashboard currentUser={currentUser} setcurrentUser={this.setCurrentUser} logout={this.logout} />
-              </Guard>
-            } /> */}
-
-            {/* <Route path='/Login' render={() =>
-              <Guard condition={!currentUser} redirectTo='/'>
-                <Login currentUser={currentUser} setCurrentUser={this.setCurrentUser} />
-              </Guard>
-            } /> */}
-
-            {/* <Route path='/Register' render={() =>
-              <Guard condition={!currentUser} redirectTo='/'>
-                <Registration currentUser={currentUser} setCurrentUser={this.setCurrentUser} />
-              </Guard>
-            } /> */}
-          </div>
+      <div className='App'>
+        <header className='App-header'>
+          <h1 className='App-title'><strong>The Bricks</strong></h1>
+        </header>
+        <div>
+          <Login setCurrentUser={this.setCurrentUser} />
+          <Registration setCurrentUser={this.setCurrentUser} />
         </div>
-      </Router>
+      </div>
     )
-  }
-}
-
-const Guard = ({ redirectTo, condition, children }) => {
-  if (condition) {
-    return children
-  } else {
-    return <Redirect to={redirectTo} />
   }
 }
 

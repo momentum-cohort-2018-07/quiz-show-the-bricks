@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import { Field, Label, Control, Input, Button, Notification } from 'bloomer'
 
 class Login extends Component {
   constructor () {
@@ -14,6 +15,7 @@ class Login extends Component {
   }
 
   handlesubmit (event) {
+    event.preventDefault()
     this.setState({loggedIn: true})
     const setUser = {
       username: this.state.username,
@@ -33,20 +35,21 @@ class Login extends Component {
       <header>
         <div className='log in'>
           <form onSubmit={this.handlesubmit}>
-            <div className='columns'>
-              <div className='column' text='logo' />
-              <div className='column'>
-                <input type='text' placeholder='username' value={username}
+            <Field>
+              <Label>Username</Label>
+              <Control>
+                <Input type='text' placeholder='username' value={username}
                   onChange={(e) => this.setState({ username: e.target.value })} />
-              </div>
-              <div className='column'>
-                <input type='password' placeholder='password' value={password}
+              </Control>
+            </Field>
+            <Field>
+              <Label>Password</Label>
+              <Control>
+                <Input type='password' placeholder='password' value={password}
                   onChange={(e) => this.setState({ password: e.target.value })} />
-              </div>
-              <div className='column'>
-                <button type='submit'>Log In</button>
-              </div>
-            </div>
+              </Control>
+            </Field>
+            <Button type='submit'>LogIn</Button>
           </form>
         </div>
       </header>

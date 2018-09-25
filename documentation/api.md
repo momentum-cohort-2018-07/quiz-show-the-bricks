@@ -27,3 +27,31 @@ GET https://fierce-forest-49180.herokuapp.com/api/v1/quizzes
 api_token not required
 
 no required keys
+
+## quizzes#show
+
+GET	https://fierce-forest-49180.herokuapp.com/api/v1/quizzes/:id
+
+valid api_token required
+
+no required keys
+
+## attempts#create (submit quiz attempt)
+
+POST https://fierce-forest-49180.herokuapp.com/api/v1/attempts
+
+valid api_token required
+
+required request format:
+
+    {"quiz": {
+      "id": quiz id (integer),
+      "questions": [
+        {"id": question id (integer),
+          "answers": [
+              {"id": answer id (integer),
+                "checked": user's input (boolean)
+              }]
+        }]
+      }
+    }

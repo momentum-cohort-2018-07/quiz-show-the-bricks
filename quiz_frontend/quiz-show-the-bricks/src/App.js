@@ -3,6 +3,7 @@ import 'bulma/css/bulma.css'
 
 import EnterSite from './EnterSite'
 import QuizIndex from './QuizIndex'
+import Quiz from './Quiz'
 import './index.css'
 
 // import {
@@ -17,14 +18,15 @@ class App extends Component {
     this.state = {
       currentUser: null
     }
-    // const username = window.localStorage.getItem('username')
-    // const token = window.localStorage.getItem('token')
-    // if (username && token) {
-    //   this.state.currentUser = { username, token }
-    // // this.setState(state => ({token: 'token'})
-    // }
+    const username = window.localStorage.getItem('username')
+    const token = window.localStorage.getItem('token')
+    if (username && token) {
+      this.state.currentUser = { username, token }
+      this.state.token = token
+    }
     this.setCurrentUser = this.setCurrentUser.bind(this)
-    // // this.logout = this.logout.bind(this)
+    // this.currentUser = this.currentUser.bind(this)
+    // this.logout = this.logout.bind(this)
   }
 
   setCurrentUser (user) {
@@ -56,7 +58,9 @@ class App extends Component {
             ? <QuizIndex currentUser={this.currentUser} />
             : <EnterSite setCurrentUser={this.setCurrentUser} currentUser={this.currentUser} />
           }
+          <Quiz currentUser={this.currentUser} setCurrentUser={this.setCurrentUser} />
         </div>
+
       </div>
 
     )

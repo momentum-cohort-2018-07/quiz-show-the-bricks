@@ -18,13 +18,13 @@ class QuizIndex extends Component {
   render () {
     return (
       <div className='quiz-container'>
-        <ul className='quiz-index'>
+        <ol className='quiz'>
           {this.state.quizzes.map((quiz, idx) =>
             <li key={idx}>
               <h1>Quiz: {quiz.title}</h1>
             </li>
           )}
-        </ul>
+        </ol>
       </div>
     )
   }

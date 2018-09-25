@@ -2,24 +2,30 @@ class Attempt < ApplicationRecord
   belongs_to :user
   belongs_to :quiz
 
-  def score_quiz(quiz)
+  def score_quiz(quiz_input)
     quiz_score = 0
-    quiz["questions"].each do |question|
+    source_quiz = Quiz.find(quiz_input["id"])
 
-      question_correct = true
-      question["answers"].each do |answer|
+    source_quiz.questions.each do |source_question|
+      answer_scores = []
 
-        if answer["checked"] != Answer.find(answer["id"]).correct
-          question_correct = false
+      source_question.answers.each do |source_answer|
+        answer_inputs = quiz_input["answers"].select {
+          |answer| answer["id"] == source_answer.id}
+
+        if (answer_inputs.any? &&
+          answer_inputs[0]["checked"] == source_answer.correct)
+          answer_scores.push true
+        else
+          answer_scores.push false
         end
-
       end
 
-      if question_correct
+      if (answer_scores.any? && answer_scores.reduce(:&))
         quiz_score += 1
       end
-
     end
+
     self.score = quiz_score
   end
 

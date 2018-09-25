@@ -8,8 +8,7 @@ class Registration extends Component {
     this.state = {
       username: '',
       password: '',
-      // passwordConfirmation: '',
-      isRegistering: false
+      passwordConfirmation: ''
     }
     this.handlesubmit = this.handlesubmit.bind(this)
   }
@@ -45,6 +44,10 @@ class Registration extends Component {
               <Input type='password' placeholder='password' value={password}
                 onChange={(e) => this.setState({ password: e.target.value })} />
             </Control>
+          </Field>
+          <Field>
+            <Label>Confirm Password</Label>
+            <Input type='password' placeholder='password' />
           </Field>
           <Button>Register</Button>
         </form>

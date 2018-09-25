@@ -10,7 +10,8 @@ class Quiz extends Component {
     }
   }
 
-  componentDidMount (quiz, id, user) {
+  componentDidUpdate () {
+    const user = this.props.user
     if (user && user.token) {
       request.get('https://fierce-forest-49180.herokuapp.com/api/v1/quizzes/:id')
         .set(`Authorization`, `Bearer ${user.token}`)

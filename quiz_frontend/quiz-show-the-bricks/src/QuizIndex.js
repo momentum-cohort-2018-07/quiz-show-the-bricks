@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import Quiz from './Quiz'
 
 class QuizIndex extends Component {
   constructor () {
     super()
     this.state = {
-      quizzes: []
+      quizzes: [],
+      takingQuiz: false
     }
     // don't forget to bind the handleClick
+  }
+
+  renderQuiz (event) {
+    this.setState({takingQuiz: true})
   }
 
   componentDidMount () {
@@ -21,10 +27,12 @@ class QuizIndex extends Component {
         <ol className='quiz'>
           {this.state.quizzes.map((quiz, idx) =>
             <li key={idx}>
-              <h1>Quiz: {quiz.title}</h1>
+              <a onClick={() => this.renderQuiz()}>{quiz.title}</a>
+              <p>{quiz.description}</p>
             </li>
           )}
         </ol>
+        <Quiz quiz={this.props.quiz} />
       </div>
     )
   }

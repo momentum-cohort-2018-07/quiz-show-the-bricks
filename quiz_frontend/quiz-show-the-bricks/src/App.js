@@ -6,11 +6,11 @@ import QuizIndex from './QuizIndex'
 import './index.css'
 import Sidebar from './SideBar'
 
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Redirect
-// } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from 'react-router-dom'
 
 class App extends Component {
   constructor () {
@@ -60,6 +60,14 @@ class App extends Component {
       </div>
 
     )
+  }
+}
+
+const Guard = ({ redirectTo, condition, children }) => {
+  if (condition) {
+    return children
+  } else {
+    return <Redirect to={redirectTo} />
   }
 }
 

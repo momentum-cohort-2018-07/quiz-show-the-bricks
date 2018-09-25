@@ -5,12 +5,14 @@ import EnterSite from './EnterSite'
 import QuizIndex from './QuizIndex'
 import './index.css'
 import Sidebar from './SideBar'
+import Registration from './Registration'
+import Login from './Login'
 
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Redirect
-// } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from 'react-router-dom'
 
 class App extends Component {
   constructor () {
@@ -51,6 +53,32 @@ class App extends Component {
         <header className='App-header'>
           <h1 className='App-title'>The Bricks</h1>
         </header>
+        <Router>
+          <div className='board'>
+            {/* <RegistrationForm currentUser={this.state.CurrentUser} setCurrentUser={this.setCurrentUser} /> */}
+            {/* <LoginForm currentUser={this.state.CurrentUser} setCurrentUser={this.setCurrentUser} /> */}
+            {/* <Dashboard currentUser={this.state.CurrentUser} setcurrentUser={this.setCurrentUser} logout={this.logout} /> */}
+
+            {/* <Route exact path='/' render={() =>
+              <Guard condition={currentUser} redirectTo='./login'>
+                <Dashboard currentUser={currentUser} setcurrentUser={this.setCurrentUser} logout={this.logout} />
+              </Guard>
+            } /> */}
+
+            <Route path='./Login' render={() =>
+              <Guard condition={!currentUser} redirectTo='/'>
+                <Login currentUser={currentUser} setCurrentUser={this.setCurrentUser} />
+              </Guard>
+            } />
+
+            <Route path='./Registration' render={() =>
+              <Guard condition={!currentUser} redirectTo='/'>
+                <Registration currentUser={currentUser} setCurrentUser={this.setCurrentUser} />
+              </Guard>
+
+            } />
+          </div>
+        </Router>
         <div className='quiz-display'>
           {currentUser
             ? <QuizIndex currentUser={currentUser} />
@@ -60,6 +88,13 @@ class App extends Component {
       </div>
 
     )
+  }
+}
+const Guard = ({ redirectTo, condition, children }) => {
+  if (condition) {
+    return children
+  } else {
+    return <Redirect to={redirectTo} />
   }
 }
 

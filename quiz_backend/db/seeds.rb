@@ -87,4 +87,15 @@ QUIZZES_TABLE.each {|quiz_row|
           answer.save
         }
     }
+
+  5.times do
+    attempt = Attempt.new({
+      "score": rand(0..quiz.questions.length),
+      "quiz_id": quiz.id,
+      "user_id": User.all.shuffle.first.id
+    })
+    attempt.save
+  end
+
 }
+

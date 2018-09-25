@@ -34,10 +34,8 @@ class EnterSite extends Component {
         </div>
         {this.state.registering
           ? <Registration setCurrentUser={this.props.setCurrentUser}
-            currentUser={this.props.currentUser}
             registering={this.props.registering} />
-          : <Login setCurrentUser={this.props.setCurrentUser}
-            currentUser={this.props.currentUser} />
+          : <Login setCurrentUser={this.props.setCurrentUser} />
         }
       </div>
     )

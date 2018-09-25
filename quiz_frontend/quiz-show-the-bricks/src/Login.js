@@ -16,16 +16,14 @@ class Login extends Component {
 
   handlesubmit (event) {
     event.preventDefault()
-    this.setState({loggedIn: true})
+    // this.setState({loggedIn: true})
     const setUser = {
       username: this.state.username,
       password: this.state.password
     }
-    event.preventDefault()
-    console.log(this.state.username, 'username')
     request.post('https://fierce-forest-49180.herokuapp.com/api/v1/users/login')
       .send(setUser)
-      .then(res => res.body)
+      .then(res => res.body.user)
       .then(user => this.props.setCurrentUser(user))
   }
 
@@ -33,7 +31,7 @@ class Login extends Component {
     const { username, password, errorMsg } = this.state
     return (
       <header>
-        <div className='log in'>
+        <div className='login'>
           <form onSubmit={this.handlesubmit}>
             <Field>
               <Label>Username</Label>

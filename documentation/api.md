@@ -34,6 +34,9 @@ GET	https://fierce-forest-49180.herokuapp.com/api/v1/quizzes/:id
 
 valid api_token required
 
+<<<<<<< HEAD
+no required keys
+=======
 no required keys
 
 ## attempts#create (submit quiz attempt)
@@ -55,3 +58,4 @@ required request format:
         }]
       }
     }
+>>>>>>> 58492daf72f1f0f47185e30839e772a4b5bd36d7

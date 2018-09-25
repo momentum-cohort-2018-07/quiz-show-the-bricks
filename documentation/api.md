@@ -49,13 +49,10 @@ required request format:
 
     {"quiz": {
       "id": quiz id (integer),
-      "questions": [
-        {"id": question id (integer),
-          "answers": [
-              {"id": answer id (integer),
-                "checked": user's input (boolean)
-              }]
-        }]
+      "answers": [
+          {"id": answer id (integer),
+            "checked": user's input (boolean)
+          }]
       }
     }
 >>>>>>> 58492daf72f1f0f47185e30839e772a4b5bd36d7

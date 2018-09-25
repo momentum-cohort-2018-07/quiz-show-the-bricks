@@ -1,5 +1,21 @@
-body {
-  margin: 0;
-  padding: 0;
+.App {
+  border: 1px solid black;
+  display: inline-block;
+  vertical-align: top;
+  padding: 1rem 2rem;
   font-family: sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #BC9E9C;
+}
+
+.column {
+  width: 40%;
+}
+
+.App-title {
+  font-size: 2rem;
+  font-style: bold;
+  text-align: left;
+  margin-left: 10px;
 }

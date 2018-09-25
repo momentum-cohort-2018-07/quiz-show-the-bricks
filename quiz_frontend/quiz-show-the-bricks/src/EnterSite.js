@@ -21,7 +21,7 @@ class EnterSite extends Component {
 
   render () {
     return (
-      <div className='column is-three-fifths '>
+      <div className='column'>
         <div className='entry-options'>
           <div className='entry-text'
             onClick={() => this.renderLogin()}>

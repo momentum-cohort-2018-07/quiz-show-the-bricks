@@ -31,7 +31,7 @@ class App extends Component {
   setCurrentUser (user) {
     console.log(user)
     window.localStorage.setItem('username', user.username)
-    window.localStorage.setItem('token', user.token)
+    window.localStorage.setItem('token', user.api_token)
     this.setState({ currentUser: user })
   }
 
@@ -53,8 +53,8 @@ class App extends Component {
         </header>
         <div className='quiz-display'>
           {currentUser
-            ? <QuizIndex currentUser={this.currentUser} />
-            : <EnterSite setCurrentUser={this.setCurrentUser} currentUser={this.currentUser} />
+            ? <QuizIndex currentUser={currentUser} />
+            : <EnterSite setCurrentUser={this.setCurrentUser} />
           }
         </div>
       </div>

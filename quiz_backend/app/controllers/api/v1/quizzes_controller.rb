@@ -6,6 +6,7 @@ class Api::V1::QuizzesController < ApplicationController
 
   def show
     if authenticated_user
+      @user = authenticated_user
       @quiz = Quiz.find(params[:id])
       render "/api/v1/quizzes/show_success.json", status: :ok
     else

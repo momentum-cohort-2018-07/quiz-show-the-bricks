@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect, NavLink
+} from 'react-router-dom'
 
 class Quiz extends Component {
   constructor (props) {
@@ -19,12 +24,15 @@ class Quiz extends Component {
   }
 
   render () {
-    let { quiz } = this.state
+    let { quiz } = this.props
     console.log({quiz})
     return (
-      <div>
-        {quiz}
-      </div>
+      <NavLink to='/quizzes/:id' onClick={(e) => this.handleClick}>
+        <div className='quiz-overview'>
+          <div key={quiz.id} className='quiz-title has-text-weight-bold'>{quiz.title}</div>
+          <div className='question-count'>{quiz.qnum}</div>
+        </div>
+      </NavLink>
     )
   }
 }

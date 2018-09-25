@@ -16,12 +16,12 @@ class App extends Component {
     this.state = {
       currentUser: null
     }
-    // const username = window.localStorage.getItem('username')
-    // const token = window.localStorage.getItem('token')
-    // if (username && token) {
-    //   this.state.currentUser = { username, token }
-    // // this.setState(state => ({token: 'token'})
-    // }
+    const username = window.localStorage.getItem('username')
+    const token = window.localStorage.getItem('token')
+    if (username && token) {
+      // this.state.currentUser = { username, token }
+    // this.setState(state => ({token: 'token'})
+    }
     this.setCurrentUser = this.setCurrentUser.bind(this)
     // // this.logout = this.logout.bind(this)
   }
@@ -33,15 +33,12 @@ class App extends Component {
   }
 
   logOut () {
+    window.setCurrentUser(null)
+    window.localStorage.clear()
+    this.setState({
+      currentUser: null
+    })
   }
-
-  // logOut () {
-  //   window.setCurrentUser(null)
-  //   window.localStorage.clear()
-  //   this.setState({
-  //     currentUser: null
-  //   })
-  // }
 
   render () {
     const { currentUser } = this.state

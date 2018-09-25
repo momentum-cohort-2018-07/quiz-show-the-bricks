@@ -4,6 +4,7 @@ import 'bulma/css/bulma.css'
 import EnterSite from './EnterSite'
 import QuizIndex from './QuizIndex'
 import './index.css'
+import Sidebar from './Sidebar'
 
 // import {
 //   BrowserRouter as Router,
@@ -45,6 +46,7 @@ class App extends Component {
     const { currentUser } = this.state
     return (
       <div className='App'>
+        <Sidebar currentUser={currentUser} onLogout={this.logOut} />
         <header className='App-header'>
           <h1 className='App-title'>The Bricks</h1>
         </header>

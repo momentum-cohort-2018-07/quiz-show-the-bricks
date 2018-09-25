@@ -10,21 +10,21 @@ class Quiz extends Component {
     }
   }
 
-  componentDidMount (quiz, id, user) {
-    if (user && user.token) {
+  componentDidUpdate () {
+    const {currentUser} = this.state
+    if (currentUser && currentUser.token) {
       request.get('https://fierce-forest-49180.herokuapp.com/api/v1/quizzes/:id')
-        .set(`Authorization`, `Bearer ${user.token}`)
-        .then(res => { this.setState({ quiz: res.body.quiz }) })
+        .set(`Authorization`, `Bearer ${currentUser.token}`)
+        .then(res => { this.setState({ quiz: res.body }) })
     }
+    console.log(this.quiz)
   }
 
   render () {
     let { quiz } = this.state
     console.log({quiz})
     return (
-      <div>
-        {quiz}
-      </div>
+      <div key={quiz.id}>{quiz.title}</div>
     )
   }
 }

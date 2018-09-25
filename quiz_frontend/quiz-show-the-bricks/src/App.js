@@ -3,6 +3,7 @@ import 'bulma/css/bulma.css'
 
 import EnterSite from './EnterSite'
 import QuizIndex from './QuizIndex'
+import Quiz from './Quiz'
 import './index.css'
 import Sidebar from './SideBar'
 
@@ -44,7 +45,7 @@ class App extends Component {
   }
 
   render () {
-    const { currentUser } = this.state
+    const { currentUser, quiz } = this.state
     return (
       <div className='App'>
         <Sidebar currentUser={currentUser} onLogout={this.logOut} />
@@ -56,6 +57,7 @@ class App extends Component {
             ? <QuizIndex currentUser={currentUser} />
             : <EnterSite setCurrentUser={this.setCurrentUser} />
           }
+          <Quiz>Quiz{quiz} currentUser={currentUser} </Quiz>
         </div>
       </div>
 

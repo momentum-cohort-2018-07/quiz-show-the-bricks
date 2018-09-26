@@ -20,9 +20,9 @@ class Api::V1::AttemptsController < ApplicationController
     end
   end
 
-  def user_index
+  def index
     if authenticated_user
-      @attempts = User.find(params[:user_id]).attempts.order(created_at: :desc)
+      @attempts = authenticated_user.attempts.order(created_at: :desc)
       render "/api/v1/attempts/index_success.json"
     else
       @message = "invalid HTTP authentication token"

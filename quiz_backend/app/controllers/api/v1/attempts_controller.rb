@@ -18,7 +18,16 @@ class Api::V1::AttemptsController < ApplicationController
       @message = "invalid HTTP authentication token"
       render "/api/failure.json", status: :unauthorized
     end
-    
+  end
+
+  def index
+    if authenticated_user
+      @attempts = authenticated_user.attempts.order(created_at: :desc)
+      render "/api/v1/attempts/index_success.json"
+    else
+      @message = "invalid HTTP authentication token"
+      render "/api/failure.json", status: :unauthorized
+    end
   end
 
   private

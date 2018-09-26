@@ -52,3 +52,11 @@ required request format:
           }]
       }
     }
+
+## attempts#user_index (user's attempts for dashboard)
+
+GET	https://fierce-forest-49180.herokuapp.com/api/v1/attempts
+
+valid api_token required
+
+no required keys

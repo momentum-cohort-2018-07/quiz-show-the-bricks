@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import { Field, Label, Control, Input, Button } from 'bloomer'
 
 class Registration extends Component {
   constructor () {
@@ -7,8 +8,7 @@ class Registration extends Component {
     this.state = {
       username: '',
       password: '',
-      // passwordConfirmation: '',
-      isRegistering: false
+      passwordConfirmation: ''
     }
     this.handlesubmit = this.handlesubmit.bind(this)
   }
@@ -27,21 +27,29 @@ class Registration extends Component {
   }
 
   render () {
-    const { username, password, errorMsg, } = this.state
+    const { username, password, errorMsg } = this.state
     return (
       <div className='register'>
         <form onSubmit={this.handlesubmit}>
-          <div className='column'>
-            <input type='text' placeholder='username' value={username}
-              onChange={(e) => this.setState({ username: e.target.value })} />
-          </div>
-          <div className='column'>
-            <input type='password' placeholder='password' value={password}
-              onChange={(e) => this.setState({ password: e.target.value })} />
-          </div>
-          <div className='column'>
-            <button>Register</button>
-          </div>
+          <Field>
+            <Label>Username</Label>
+            <Control>
+              <Input type='text' placeholder='username' value={username}
+                onChange={(e) => this.setState({ username: e.target.value })} />
+            </Control>
+          </Field>
+          <Field>
+            <Label>Password</Label>
+            <Control>
+              <Input type='password' placeholder='password' value={password}
+                onChange={(e) => this.setState({ password: e.target.value })} />
+            </Control>
+          </Field>
+          <Field>
+            <Label>Confirm Password</Label>
+            <Input type='password' placeholder='password' />
+          </Field>
+          <Button>Register</Button>
         </form>
       </div>
     )

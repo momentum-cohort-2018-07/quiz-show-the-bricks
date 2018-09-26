@@ -3,5 +3,5 @@ json.quizzes @quizzes do |quiz|
   json.title quiz.title
   json.description quiz.description
   json.questions_count quiz.questions.length
-  json.average_score 1.7
+  json.average_score quiz.average_score
 end

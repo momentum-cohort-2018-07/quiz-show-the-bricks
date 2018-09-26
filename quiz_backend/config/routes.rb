@@ -6,7 +6,9 @@ Rails.application.routes.draw do
       resources :quizzes, only: [:index, :show]
 
       post 'users/login', to: 'users#login'
-      resources :users, only: [:create]
+      resources :users, only: [:create] do
+        get 'attempts', to: 'attempts#user_index'
+      end
 
       resources :attempts, only: [:create]
     end

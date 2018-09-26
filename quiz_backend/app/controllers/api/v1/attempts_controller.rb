@@ -2,6 +2,7 @@ class Api::V1::AttemptsController < ApplicationController
 
   def create
     if authenticated_user
+      @user = authenticated_user
       @attempt = Attempt.new({
         "quiz_id": params[:quiz][:id],
         "user_id": authenticated_user.id

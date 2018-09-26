@@ -46,10 +46,7 @@ required request format:
 
     {"quiz": {
       "id": quiz id (integer),
-      "answers": [
-          {"id": answer id (integer),
-            "checked": user's input (boolean)
-          }]
+      "answers": [answer id, answer id, answer id]
       }
     }
 

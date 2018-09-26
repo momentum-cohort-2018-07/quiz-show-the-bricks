@@ -1,34 +1,80 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import { Radio, Button } from 'bloomer'
+import './index.css'
 
 class Quiz extends Component {
   constructor (props) {
     super()
     this.state = {
       quiz: [],
-      published: false
+      selectedAnswers: [],
+      score: ''
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidUpdate () {
-    const user = this.props.user
+  componentDidMount () {
+    const user = this.props.currentUser
     if (user && user.token) {
-      request.get('https://fierce-forest-49180.herokuapp.com/api/v1/quizzes/:id')
+      request.get(`https://fierce-forest-49180.herokuapp.com/api/v1/quizzes/${this.props.id}`)
         .set(`Authorization`, `Bearer ${user.token}`)
         .then(res => { this.setState({ quiz: res.body.quiz }) })
     }
   }
 
+  handleSubmit (answers) {
+    const user = this.props.currentUser
+    if (user && user.token) {
+      const formattedAnswer = {'quiz': {
+        'id': this.state.quiz.id,
+        'answers': [Object.values(answers)]
+      }
+      }
+      request.post('https://fierce-forest-49180.herokuapp.com/api/v1/attempts')
+        .set(`Authorization`, `Bearer ${user.token}`)
+        .send(formattedAnswer)
+        .then(res => { this.setState({ socre: res.body.score }) })
+    }
+  }
+
+  handleAnswer (event) {
+    this.setState({
+      selectedAnswers: Object.assign({}, this.state.selectedAnswers, { [event.target.name]: event.target.value })
+    })
+  }
+
   render () {
     let { quiz } = this.state
-    console.log({quiz})
+    const { score } = this.state
+    
+    if (score) {
+      return (
+        <div className='quiz-score'>
+          <h1>{quiz.title}</h1>
+          <h3>Your Score Was {quiz.question.score}</h3>
+        </div>
+      )
+    }
+
+    if (!quiz.questions) {
+      return <div className='loader' />
+    }
     return (
       <div className='quiz-div'>
-        <h1 className='quiz-title'>{quiz.title}></h1>
-        <div classname='quiz-questions'>{quiz.questions}</div>
-        {this.state.quiz.map((quiz) =>
-          <div>{quiz.body.answers}</div>
-        )}
+        <h1 className='quiz-title'>{quiz.title}</h1>
+        <h2 className='quiz-questions'>
+          {quiz.questions.map((question, idx) =>
+            <div key={idx}> Question: {question.body}
+              <div className='quiz-answers'>
+                <ul>
+                  {question.answers.map((answer, idx) =>
+                    <li key={idx}> <Radio name={question.id} onChange={(event) => this.handleAnswer(event)}>{answer.body}</Radio></li>)}
+                </ul>
+              </div>
+            </div>)}
+        </h2>
+        <Button className='submit-quiz' onClick={() => this.handleSubmit(this.state.selectedAnswers)}>Submit</Button>
       </div>
     )
   }

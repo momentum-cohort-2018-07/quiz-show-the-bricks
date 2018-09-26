@@ -7,6 +7,7 @@ import './index.css'
 import Sidebar from './SideBar'
 import Login from './Login'
 import Registration from './Registration'
+import Quiz from './Quiz'
 
 import {
   BrowserRouter as Router,
@@ -37,7 +38,6 @@ class App extends Component {
     this.setState({ currentUser: user })
   }
 
- 
   logout () {
     window.localStorage.setItem('username', null)
     window.localStorage.clear()
@@ -55,12 +55,7 @@ class App extends Component {
             <h1 className='App-title'>The Bricks</h1>
           </header>
           <div className='quiz-display'>
-
-            <Route exact path='/' render={() =>
-              <Guard condition={currentUser} redirectTo='./login'>
-                <Sidebar currentUser={currentUser} onLogout={this.logOut} />
-              </Guard>
-            } />
+            <Sidebar currentUser={currentUser} onLogout={this.logOut} />
 
             <Route path='/login' render={() =>
               <Guard condition={!currentUser} redirectTo='/'>
@@ -74,10 +69,17 @@ class App extends Component {
               </Guard>
             } />
 
-            <Route path='/' render={() =>
+            <Route exact path='/' render={() =>
               <Guard condition={this.state.currentUser} redirectTo='/login'>
                 <QuizIndex currentUser={currentUser} />
               </Guard>
+            } />
+
+            <Route path='/quizzes/:id' render={({ match }) => (
+              <Guard condition={this.state.currentUser} redirectTo='/login'>
+                <Quiz id={match.params.id} currentUser={currentUser} />
+              </Guard>)
+
             } />
           </div>
         </div>

@@ -24,22 +24,18 @@ class QuizIndex extends Component {
   render () {
     let { quiz } = this.props
     return (
-      <NavLink to='/quizzes:id' onClick={(e) => this.renderQuiz}>
-        <div className='quiz-container'>
-          <div key={quiz.idx} className='quiz-title has-text-weight-bold'>{quiz.title}</div>
-          <div className='quiz-description'>{quiz.description}</div>
-        </div>
-      </NavLink>
+
+      <ol className='quiz'>
+        {this.state.quizzes.map((quiz, idx) =>
+          <li key={idx}>
+
+            <h1><NavLink to={`/quizzes/${quiz.id}`}>{quiz.title}</NavLink></h1>
+            <p>{quiz.description}</p>
+          </li>
+        )}
+      </ol>
     )
   }
 }
 
 export default QuizIndex
-{/* <ol className='quiz'>
-            {this.state.quizzes.map((quiz, idx) =>
-              <li key={idx}>
-                <h1>{quiz.title}</h1>
-                <p>{quiz.description}</p>
-              </li>
-            )}
-          </ol> */}

@@ -26,14 +26,8 @@ class QuizIndex extends Component {
     return (
       <NavLink to='/quizzes:id' onClick={(e) => this.renderQuiz}>
         <div className='quiz-container'>
-          <ol className='quiz'>
-            {this.state.quizzes.map((quiz, idx) =>
-              <li key={idx}>
-                <h1>{quiz.title}</h1>
-                <p>{quiz.description}</p>
-              </li>
-            )}
-          </ol>
+          <div key={quiz.idx} className='quiz-title has-text-weight-bold'>{quiz.title}</div>
+          <div className='quiz-description'>{quiz.description}</div>
         </div>
       </NavLink>
     )
@@ -41,3 +35,11 @@ class QuizIndex extends Component {
 }
 
 export default QuizIndex
+{/* <ol className='quiz'>
+            {this.state.quizzes.map((quiz, idx) =>
+              <li key={idx}>
+                <h1>{quiz.title}</h1>
+                <p>{quiz.description}</p>
+              </li>
+            )}
+          </ol> */}

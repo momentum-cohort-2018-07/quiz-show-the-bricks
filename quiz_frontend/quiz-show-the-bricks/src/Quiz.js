@@ -23,8 +23,12 @@ class Quiz extends Component {
     let { quiz } = this.state
     console.log({quiz})
     return (
-      <div>
-        {quiz}
+      <div className='quiz-div'>
+        <h1 className='quiz-title'>{quiz.title}></h1>
+        <div classname='quiz-questions'>{quiz.question}</div>
+        {quiz.answers.map((answer) =>
+          <div>{quiz.answer}</div>
+        )}
       </div>
     )
   }

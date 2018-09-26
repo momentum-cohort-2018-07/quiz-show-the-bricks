@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent'
-import Quiz from './Quiz'
+import { NavLink } from 'react-router-dom'
 
 class QuizIndex extends Component {
   constructor () {
@@ -13,7 +13,7 @@ class QuizIndex extends Component {
   }
 
   renderQuiz (event) {
-    this.setState({takingQuiz: true})
+    this.props.renderQuiz()
   }
 
   componentDidMount () {
@@ -22,18 +22,20 @@ class QuizIndex extends Component {
   }
 
   render () {
+    let { quiz } = this.props
     return (
-      <div className='quiz-container'>
-        <ol className='quiz'>
-          {this.state.quizzes.map((quiz, idx) =>
-            <li key={idx}>
-              <a onClick={() => this.renderQuiz()}>{quiz.title}</a>
-              <p>{quiz.description}</p>
-            </li>
-          )}
-        </ol>
-        <Quiz quiz={this.props.quiz} />
-      </div>
+      <NavLink to='/quizzes:id' onClick={(e) => this.renderQuiz}>
+        <div className='quiz-container'>
+          <ol className='quiz'>
+            {this.state.quizzes.map((quiz, idx) =>
+              <li key={idx}>
+                <h1>{quiz.title}</h1>
+                <p>{quiz.description}</p>
+              </li>
+            )}
+          </ol>
+        </div>
+      </NavLink>
     )
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import request from 'superagent'
 import { Radio, Button } from 'bloomer'
 import './index.css'
+import { NavLink } from 'react-router-dom'
 
 class Quiz extends Component {
   constructor (props) {
@@ -52,11 +53,14 @@ class Quiz extends Component {
 
     if (score) {
       return (
-        <div className='quiz-score'>
-          <h1>{quiz.title}</h1>
-          <h3>Your Score Was {score}</h3>
-          <h3>Your Best Score Was {usersBest}</h3>
-          <h3>The Global Average Is {globalAvg}</h3>
+        <div>
+          <div className='quiz-score'>
+            <h1>{quiz.title}</h1>
+            <h3>Your Score Was {score}</h3>
+            <h3>Your Best Score Was {usersBest}</h3>
+            <h3>The Global Average Is {globalAvg}</h3>
+          </div>
+          <h1><NavLink to='/'>Return to Index</NavLink></h1>
         </div>
       )
     }
@@ -73,7 +77,7 @@ class Quiz extends Component {
               <div className='quiz-answers'>
                 <ul>
                   {question.answers.map((answer, idx) =>
-                    <li key={idx}> <Radio name={answer.body} value={answer.id} onChange={(event) => this.handleAnswer(event)}>{answer.body}</Radio></li>)}
+                    <li key={idx}> <Radio name={quiz.answer} value={answer.id} onChange={(event) => this.handleAnswer(event)}>{answer.body}</Radio></li>)}
                 </ul>
               </div>
             </div>)}

@@ -15,8 +15,9 @@ class Registration extends Component {
   }
 
   handlesubmit (event) {
+    console.log('hi')
     event.preventDefault()
-    this.setState({isRegistering: true})
+    // this.setState({isRegistering: true})
     const newUser = {
       username: this.state.username,
       password: this.state.password
@@ -55,11 +56,11 @@ class Registration extends Component {
                   onChange={(e) => this.setState({ password: e.target.value })} />
               </Control>
             </Field>
-            <Field>
-              <Label>Confirm Password</Label>
-              <Input type='password' placeholder='password' />
-            </Field>
-            <Button>Register</Button>
+            {/* <Field> */}
+              {/* <Label>Confirm Password</Label> */}
+              {/* <Input type='password' placeholder='password' /> */}
+            {/* </Field> */}
+            <Button type='submit'>Register</Button>
           </form>
         </div>
       </div>

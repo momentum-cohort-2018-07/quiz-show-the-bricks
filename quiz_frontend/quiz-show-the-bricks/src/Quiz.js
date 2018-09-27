@@ -9,7 +9,9 @@ class Quiz extends Component {
     this.state = {
       quiz: [],
       selectedAnswers: [],
-      score: ''
+      score: '',
+      usersBest: '',
+      globalAvg: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -28,13 +30,14 @@ class Quiz extends Component {
     if (user && user.token) {
       const formattedAnswer = {'quiz': {
         'id': this.state.quiz.id,
-        'answers': [Object.values(answers)]
+        'answers': Object.values(answers)
       }
       }
       request.post('https://fierce-forest-49180.herokuapp.com/api/v1/attempts')
         .set(`Authorization`, `Bearer ${user.token}`)
         .send(formattedAnswer)
-        .then(res => { this.setState({ socre: res.body.score }) })
+        .then(res => { this.setState({ score: res.body.attempt.score, usersBest: res.body.attempt.users_best, globalAvg: res.body.attempt.global_average }) })
+        // .then(res => { this.setState({ usersBest: res.body.attempt.users_best }) })
     }
   }
 
@@ -45,14 +48,15 @@ class Quiz extends Component {
   }
 
   render () {
-    let { quiz } = this.state
-    const { score } = this.state
-    
+    let { quiz, score, usersBest, globalAvg } = this.state
+
     if (score) {
       return (
         <div className='quiz-score'>
           <h1>{quiz.title}</h1>
-          <h3>Your Score Was {quiz.question.score}</h3>
+          <h3>Your Score Was {score}</h3>
+          <h3>Your Best Score Was {usersBest}</h3>
+          <h3>The Global Average Is {globalAvg}</h3>
         </div>
       )
     }
@@ -69,7 +73,7 @@ class Quiz extends Component {
               <div className='quiz-answers'>
                 <ul>
                   {question.answers.map((answer, idx) =>
-                    <li key={idx}> <Radio name={question.id} onChange={(event) => this.handleAnswer(event)}>{answer.body}</Radio></li>)}
+                    <li key={idx}> <Radio name={answer.body} value={answer.id} onChange={(event) => this.handleAnswer(event)}>{answer.body}</Radio></li>)}
                 </ul>
               </div>
             </div>)}

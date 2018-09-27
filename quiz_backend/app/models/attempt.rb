@@ -8,7 +8,7 @@ class Attempt < ApplicationRecord
 
     source_quiz.questions.each do |source_question|
       correct_answer = Answer.find_by question_id: source_question.id, correct: true
-      if quiz_input["answers"].include?(correct_answer.id)
+      if quiz_input["answers"].include?(correct_answer.id.to_s)
         quiz_score += 1
       end
     end

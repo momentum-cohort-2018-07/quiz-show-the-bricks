@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import { NavLink } from 'react-router-dom'
 import { Field, Label, Control, Input, Button } from 'bloomer'
 
 class Registration extends Component {
@@ -29,28 +30,38 @@ class Registration extends Component {
   render () {
     const { username, password, errorMsg } = this.state
     return (
-      <div className='register'>
-        <form onSubmit={this.handlesubmit}>
-          <Field>
-            <Label>Username</Label>
-            <Control>
-              <Input type='text' placeholder='username' value={username}
-                onChange={(e) => this.setState({ username: e.target.value })} />
-            </Control>
-          </Field>
-          <Field>
-            <Label>Password</Label>
-            <Control>
-              <Input type='password' placeholder='password' value={password}
-                onChange={(e) => this.setState({ password: e.target.value })} />
-            </Control>
-          </Field>
-          <Field>
-            <Label>Confirm Password</Label>
-            <Input type='password' placeholder='password' />
-          </Field>
-          <Button>Register</Button>
-        </form>
+
+      <div>
+
+        <div className='is-size-4 has-text-centered'>
+          <NavLink to='/login'>Log In</NavLink>
+       &nbsp;|&nbsp;
+          <NavLink to='/register'>Register</NavLink>
+        </div>
+
+        <div className='register'>
+          <form onSubmit={this.handlesubmit}>
+            <Field>
+              <Label>Username</Label>
+              <Control>
+                <Input type='text' placeholder='username' value={username}
+                  onChange={(e) => this.setState({ username: e.target.value })} />
+              </Control>
+            </Field>
+            <Field>
+              <Label>Password</Label>
+              <Control>
+                <Input type='password' placeholder='password' value={password}
+                  onChange={(e) => this.setState({ password: e.target.value })} />
+              </Control>
+            </Field>
+            <Field>
+              <Label>Confirm Password</Label>
+              <Input type='password' placeholder='password' />
+            </Field>
+            <Button>Register</Button>
+          </form>
+        </div>
       </div>
     )
   }

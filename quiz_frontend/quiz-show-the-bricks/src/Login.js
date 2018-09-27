@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import { NavLink } from 'react-router-dom'
 import { Field, Label, Control, Input, Button, Notification } from 'bloomer'
+
 
 class Login extends Component {
   constructor () {
@@ -30,7 +32,14 @@ class Login extends Component {
   render () {
     const { username, password, errorMsg } = this.state
     return (
-      <header>
+      <div>
+
+        <div className='is-size-4 has-text-centered'>
+          <NavLink to='/login'>Log In</NavLink>
+      &nbsp;|&nbsp;
+          <NavLink to='/register'>Register</NavLink>
+        </div>
+
         <div className='login'>
           <form onSubmit={this.handlesubmit}>
             <Field>
@@ -50,7 +59,7 @@ class Login extends Component {
             <Button type='submit'>LogIn</Button>
           </form>
         </div>
-      </header>
+      </div>
     )
   }
 }

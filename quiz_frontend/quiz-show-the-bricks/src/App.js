@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import 'bulma/css/bulma.css'
 
-import EnterSite from './EnterSite'
+// import EnterSite from './EnterSite'
 import QuizIndex from './QuizIndex'
 import './index.css'
 import Sidebar from './SideBar'
+import Login from './Login'
+import Registration from './Registration'
+import Quiz from './Quiz'
 
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Redirect
-// } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from 'react-router-dom'
 
 class App extends Component {
   constructor () {
@@ -25,7 +28,7 @@ class App extends Component {
     // this.setState(state => ({token: 'token'})
     }
     this.setCurrentUser = this.setCurrentUser.bind(this)
-    this.logOut = this.logOut.bind(this)
+    this.logOut = this.logout.bind(this)
   }
 
   setCurrentUser (user) {
@@ -35,7 +38,7 @@ class App extends Component {
     this.setState({ currentUser: user })
   }
 
-  logOut () {
+  logout () {
     window.localStorage.setItem('username', null)
     window.localStorage.clear()
     this.setState({
@@ -46,20 +49,50 @@ class App extends Component {
   render () {
     const { currentUser } = this.state
     return (
-      <div className='App'>
-        <Sidebar currentUser={currentUser} onLogout={this.logOut} />
-        <header className='App-header'>
-          <h1 className='App-title'>The Bricks</h1>
-        </header>
-        <div className='quiz-display'>
-          {currentUser
-            ? <QuizIndex currentUser={currentUser} />
-            : <EnterSite setCurrentUser={this.setCurrentUser} />
-          }
-        </div>
-      </div>
+      <Router>
+        <div className='App'>
+          <header className='App-header'>
+            <h1 className='App-title'>The Bricks</h1>
+          </header>
+          <div className='quiz-display'>
+            <Sidebar currentUser={currentUser} onLogout={this.logOut} />
 
+            <Route path='/login' render={() =>
+              <Guard condition={!currentUser} redirectTo='/'>
+                <Login setCurrentUser={this.setCurrentUser} />
+              </Guard>
+            } />
+
+            <Route path='/register' render={() =>
+              <Guard condition={!currentUser} redirectTo='/'>
+                <Registration setCurrentUser={this.setCurrentUser} />
+              </Guard>
+            } />
+
+            <Route exact path='/' render={() =>
+              <Guard condition={this.state.currentUser} redirectTo='/login'>
+                <QuizIndex currentUser={currentUser} />
+              </Guard>
+            } />
+
+            <Route path='/quizzes/:id' render={({ match }) => (
+              <Guard condition={this.state.currentUser} redirectTo='/login'>
+                <Quiz id={match.params.id} currentUser={currentUser} />
+              </Guard>)
+
+            } />
+          </div>
+        </div>
+      </Router>
     )
+  }
+}
+
+const Guard = ({ redirectTo, condition, children }) => {
+  if (condition) {
+    return children
+  } else {
+    return <Redirect to={redirectTo} />
   }
 }
 
